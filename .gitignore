@@ -1,0 +1,8 @@
+#STM32
+Firmware/STM32/StateMachine/Debug/
+Firmware/STM32/StateMachine/Drivers/
+Firmware/STM32/.metadata/
+Firmware/STM32/StateMachine/.cproject
+Firmware/STM32/StateMachine/.mxproject
+Firmware/STM32/StateMachine/.project
+Firmware/stm32/StateMachine/.settings/
