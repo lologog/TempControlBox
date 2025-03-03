@@ -6,3 +6,8 @@ Firmware/STM32/StateMachine/.cproject
 Firmware/STM32/StateMachine/.mxproject
 Firmware/STM32/StateMachine/.project
 Firmware/stm32/StateMachine/.settings/
+
+#PCB
+PCB/PID_TEMPERATURE_KICAD-backups
+PCB/fp-info-cache
+PCB/PID_TEMPERATURE_KICAD.kicad_prl
