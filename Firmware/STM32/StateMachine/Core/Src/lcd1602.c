@@ -108,6 +108,11 @@ void LCD_SendString(char *str)
 	}
 }
 
+void LCD_Clear(void)
+{
+	LCD_SendCommand(0x01);
+	HAL_Delay(2);
+}
 
 
 

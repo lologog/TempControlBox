@@ -92,6 +92,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   LCD_Init(&hi2c1);
   LCD_SendString("EMBEDDED <3");
+  LCD_Clear();
   /* USER CODE END 2 */
 
   /* Infinite loop */
