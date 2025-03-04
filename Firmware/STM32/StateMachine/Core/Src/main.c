@@ -48,11 +48,8 @@ I2C_HandleTypeDef hi2c1;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-<<<<<<< HEAD
-=======
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
->>>>>>> dev
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -90,11 +87,8 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-<<<<<<< HEAD
-=======
   MX_GPIO_Init();
   MX_I2C1_Init();
->>>>>>> dev
   /* USER CODE BEGIN 2 */
   LCD_Init(&hi2c1);
 
@@ -146,9 +140,6 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
-
-<<<<<<< HEAD
-=======
 /**
   * @brief I2C1 Initialization Function
   * @param None
@@ -237,7 +228,6 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_2 */
 }
 
->>>>>>> dev
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
