@@ -99,3 +99,32 @@ void LCD_SendChar(char data)
 	HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDRESS, data_t, 4, 100);
 }
 
+void LCD_SendString(char *str)
+{
+	while (*str) // loop unitl the null character (end of string) '\0' is found
+	{
+		LCD_SendChar(*str);
+		str++;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -91,7 +91,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   LCD_Init(&hi2c1);
-  LCD_SendChar('1');
+  LCD_SendString("EMBEDDED <3");
   /* USER CODE END 2 */
 
   /* Infinite loop */
