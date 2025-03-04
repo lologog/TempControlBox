@@ -94,22 +94,31 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 0)
-	  {
-		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 0);
-	  }
-	  else
+	  if (HAL_GPIO_ReadPin(ENC1_BTN_GPIO_Port, ENC1_BTN_Pin) == 1)
 	  {
 		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
 	  }
-
-	  if (HAL_GPIO_ReadPin(BTN2_GPIO_Port, BTN2_Pin) == 0)
+	  else
 	  {
-		  HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 0);
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 0);
+	  }
+
+	  if (HAL_GPIO_ReadPin(ENC2_BTN_GPIO_Port, ENC2_BTN_Pin) == 1)
+	  {
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
 	  }
 	  else
 	  {
-		  HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 1);
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 0);
+	  }
+
+	  if (HAL_GPIO_ReadPin(ENC3_BTN_GPIO_Port, ENC3_BTN_Pin) == 1)
+	  {
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
+	  }
+	  else
+	  {
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 0);
 	  }
     /* USER CODE END WHILE */
 
@@ -167,10 +176,24 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : ENC1_BTN_Pin ENC2_BTN_Pin */
+  GPIO_InitStruct.Pin = ENC1_BTN_Pin|ENC2_BTN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : ENC3_BTN_Pin */
+  GPIO_InitStruct.Pin = ENC3_BTN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(ENC3_BTN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : BTN2_Pin BTN1_Pin */
   GPIO_InitStruct.Pin = BTN2_Pin|BTN1_Pin;
@@ -184,6 +207,9 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure peripheral I/O remapping */
+  __HAL_AFIO_REMAP_PD01_ENABLE();
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

@@ -57,6 +57,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ENC1_BTN_Pin GPIO_PIN_14
+#define ENC1_BTN_GPIO_Port GPIOC
+#define ENC2_BTN_Pin GPIO_PIN_15
+#define ENC2_BTN_GPIO_Port GPIOC
+#define ENC3_BTN_Pin GPIO_PIN_0
+#define ENC3_BTN_GPIO_Port GPIOD
 #define BTN2_Pin GPIO_PIN_4
 #define BTN2_GPIO_Port GPIOA
 #define BTN1_Pin GPIO_PIN_5
