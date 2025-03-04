@@ -94,9 +94,23 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
-	  HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 1);
-	  HAL_GPIO_WritePin(REG_MODE_GPIO_Port, REG_MODE_Pin, 1);
+	  if (HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 0)
+	  {
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 0);
+	  }
+	  else
+	  {
+		  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
+	  }
+
+	  if (HAL_GPIO_ReadPin(BTN2_GPIO_Port, BTN2_Pin) == 0)
+	  {
+		  HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 0);
+	  }
+	  else
+	  {
+		  HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 1);
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -157,6 +171,12 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : BTN2_Pin BTN1_Pin */
+  GPIO_InitStruct.Pin = BTN2_Pin|BTN1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : STM_RUNNING_Pin CONFIG_MODE_Pin REG_MODE_Pin */
   GPIO_InitStruct.Pin = STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin;
