@@ -120,21 +120,3 @@ void LCD_SetCursor(uint8_t row, uint8_t col)
 	uint8_t address = (row == 0) ? (0x80 + col) : (0xC0 + col);
 	LCD_SendCommand(address);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
