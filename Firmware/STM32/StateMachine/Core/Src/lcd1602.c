@@ -114,7 +114,12 @@ void LCD_Clear(void)
 	HAL_Delay(2);
 }
 
-
+void LCD_SetCursor(uint8_t row, uint8_t col)
+{
+	// if row 0 then address 0x80 so first line, otherwise second line
+	uint8_t address = (row == 0) ? (0x80 + col) : (0xC0 + col);
+	LCD_SendCommand(address);
+}
 
 
 
