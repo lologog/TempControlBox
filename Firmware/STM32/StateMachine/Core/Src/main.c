@@ -92,7 +92,6 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   LCD_Init(&hi2c1);
-  char key = '0';
 
   /* USER CODE END 2 */
 
@@ -100,9 +99,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  key = Keyboard_readKey();
-	  LCD_SendChar(key);
-	  LCD_SetCursor(0, 0);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
