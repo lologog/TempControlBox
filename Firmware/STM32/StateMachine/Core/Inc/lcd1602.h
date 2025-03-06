@@ -11,6 +11,14 @@
 // for HAL functions
 #include "stm32f1xx_hal.h"
 
+/*
+ * I2C uses 7-bit address, but we need to add one bit for R/W in STM32
+ * PCF8574 has default address 0x27
+ * 0x27 = 0b0010 0111 (39 dec)
+ * 0x27 << 1 = 0b0100 1110 (78 dec -> 4E hex)
+ */
+#define LCD_I2C_ADDRESS 0x4E
+
 //Function declarations
 
 /*

@@ -118,6 +118,7 @@ int main(void)
   while (1)
   {
 	  float temp = TempSensor_ReadTemp(&hi2c2);
+	  LCD_SendChar('1');
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
