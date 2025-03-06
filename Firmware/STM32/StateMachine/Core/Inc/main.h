@@ -93,6 +93,8 @@ void Error_Handler(void);
 #define ENC1_A_GPIO_Port GPIOA
 #define ENC1_B_Pin GPIO_PIN_9
 #define ENC1_B_GPIO_Port GPIOA
+#define BUZZER_CTRL_Pin GPIO_PIN_10
+#define BUZZER_CTRL_GPIO_Port GPIOA
 #define STM_RUNNING_Pin GPIO_PIN_11
 #define STM_RUNNING_GPIO_Port GPIOA
 #define CONFIG_MODE_Pin GPIO_PIN_12
@@ -103,6 +105,10 @@ void Error_Handler(void);
 #define SWCLK_GPIO_Port GPIOA
 #define REG_MODE_Pin GPIO_PIN_15
 #define REG_MODE_GPIO_Port GPIOA
+#define FAN_CTRL_Pin GPIO_PIN_4
+#define FAN_CTRL_GPIO_Port GPIOB
+#define HEAT_CTRL_Pin GPIO_PIN_5
+#define HEAT_CTRL_GPIO_Port GPIOB
 #define LCD_SCL_Pin GPIO_PIN_6
 #define LCD_SCL_GPIO_Port GPIOB
 #define LCD_SDA_Pin GPIO_PIN_7

@@ -106,6 +106,10 @@ int main(void)
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 
+  HAL_GPIO_WritePin(BUZZER_CTRL_GPIO_Port, BUZZER_CTRL_Pin, 0);
+  HAL_GPIO_WritePin(HEAT_CTRL_GPIO_Port, HEAT_CTRL_Pin, 0);
+  HAL_GPIO_WritePin(FAN_CTRL_GPIO_Port, FAN_CTRL_Pin, 0);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -356,10 +360,11 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ROW4_Pin|ROW3_Pin|ROW2_Pin|ROW1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, ROW4_Pin|ROW3_Pin|ROW2_Pin|ROW1_Pin
+                          |FAN_CTRL_Pin|HEAT_CTRL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BUZZER_CTRL_Pin|STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : ENC1_BTN_Pin ENC2_BTN_Pin */
   GPIO_InitStruct.Pin = ENC1_BTN_Pin|ENC2_BTN_Pin;
@@ -392,12 +397,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : STM_RUNNING_Pin CONFIG_MODE_Pin REG_MODE_Pin */
-  GPIO_InitStruct.Pin = STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin;
+  /*Configure GPIO pins : BUZZER_CTRL_Pin STM_RUNNING_Pin CONFIG_MODE_Pin REG_MODE_Pin */
+  GPIO_InitStruct.Pin = BUZZER_CTRL_Pin|STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : FAN_CTRL_Pin HEAT_CTRL_Pin */
+  GPIO_InitStruct.Pin = FAN_CTRL_Pin|HEAT_CTRL_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure peripheral I/O remapping */
   __HAL_AFIO_REMAP_PD01_ENABLE();
