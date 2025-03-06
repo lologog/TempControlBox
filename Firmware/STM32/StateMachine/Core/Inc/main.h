@@ -81,6 +81,10 @@ void Error_Handler(void);
 #define COL2_GPIO_Port GPIOB
 #define COL3_Pin GPIO_PIN_2
 #define COL3_GPIO_Port GPIOB
+#define TEMP_SCL_Pin GPIO_PIN_10
+#define TEMP_SCL_GPIO_Port GPIOB
+#define TEMP_SDA_Pin GPIO_PIN_11
+#define TEMP_SDA_GPIO_Port GPIOB
 #define ROW4_Pin GPIO_PIN_12
 #define ROW4_GPIO_Port GPIOB
 #define ROW3_Pin GPIO_PIN_13
