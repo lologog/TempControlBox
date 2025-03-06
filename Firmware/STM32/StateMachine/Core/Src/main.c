@@ -106,19 +106,12 @@ int main(void)
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 
-  int8_t enc1 = 0;
-  int8_t enc2 = 0;
-  int8_t enc3 = 0;
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  enc1 = htim1.Instance->CNT;
-	  enc2 = htim2.Instance->CNT;
-	  enc3 = htim3.Instance->CNT;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
