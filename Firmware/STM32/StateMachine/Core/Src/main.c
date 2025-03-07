@@ -71,7 +71,13 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == BTN2_Pin)
+    {
+        NVIC_SystemReset(); // Reset the system
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -452,11 +458,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(ENC3_BTN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BTN2_Pin BTN1_Pin */
-  GPIO_InitStruct.Pin = BTN2_Pin|BTN1_Pin;
+  /*Configure GPIO pin : BTN2_Pin */
+  GPIO_InitStruct.Pin = BTN2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BTN2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BTN1_Pin */
+  GPIO_InitStruct.Pin = BTN1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(BTN1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : COL1_Pin COL2_Pin COL3_Pin */
   GPIO_InitStruct.Pin = COL1_Pin|COL2_Pin|COL3_Pin;
@@ -487,6 +499,10 @@ static void MX_GPIO_Init(void)
 
   /*Configure peripheral I/O remapping */
   __HAL_AFIO_REMAP_PD01_ENABLE();
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

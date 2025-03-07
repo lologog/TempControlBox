@@ -73,6 +73,7 @@ void Error_Handler(void);
 #define UART_RX_GPIO_Port GPIOA
 #define BTN2_Pin GPIO_PIN_4
 #define BTN2_GPIO_Port GPIOA
+#define BTN2_EXTI_IRQn EXTI4_IRQn
 #define BTN1_Pin GPIO_PIN_5
 #define BTN1_GPIO_Port GPIOA
 #define ENC3_A_Pin GPIO_PIN_6
