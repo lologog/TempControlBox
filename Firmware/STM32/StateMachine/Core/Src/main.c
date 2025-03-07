@@ -24,6 +24,7 @@
 #include "lcd1602.h"
 #include "keyboard.h"
 #include "tempsensor.h"
+#include "logic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -121,6 +122,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  state_machine_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
