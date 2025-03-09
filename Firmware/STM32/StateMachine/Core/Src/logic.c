@@ -20,7 +20,7 @@ void state_machine_run(void)
 	switch (currentState)
 	{
 	case STATE_INIT: state_init(); break; //screen that waits for user first input (button click)
-	case STATE_REG_TYPE:break;
+	case STATE_REG_TYPE: state_reg_type(); break; //screen that show different algorithm types for regulation
 	}
 }
 
@@ -56,5 +56,40 @@ void state_init()
 	if (HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1)
 	{
 		change_state(STATE_REG_TYPE);
+		LCD_Clear();
+	}
+}
+
+void state_reg_type()
+{
+	static char pressedKey = '\0';
+
+	HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 1);
+
+	//write text on sreen
+	LCD_SetCursor(0, 0);
+	LCD_SendString("1: BANG BANG");
+	LCD_SetCursor(1, 0);
+	LCD_SendString("2: PID");
+
+	//wait for input from the user
+	while (pressedKey == '\0')
+	{
+		pressedKey = Keyboard_readKey();
+	}
+
+	if (pressedKey == '1')
+	{
+		currentState = STATE_BANG_BANG_CONF;
+		LCD_Clear();
+	}
+	else if (pressedKey == '2')
+	{
+		currentState = STATE_PID_CONF;
+		LCD_Clear();
+	}
+	else
+	{
+
 	}
 }

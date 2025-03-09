@@ -9,7 +9,9 @@
 #define INC_LOGIC_H_
 typedef enum {
 	STATE_INIT,
-	STATE_REG_TYPE
+	STATE_REG_TYPE,
+	STATE_BANG_BANG_CONF,
+	STATE_PID_CONF
 }SystemState;
 
 void state_machine_run(void); //main loop for state machine
