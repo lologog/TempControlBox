@@ -116,11 +116,15 @@ int main(void)
   MX_I2C2_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  //initialization of the peripherials and its necessaries
   LCD_Init(&hi2c1);
   HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
   TempSensor_Init(&hi2c2);
+
+  //turn on the LED that shows that STM is working
+  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
 
   /* USER CODE END 2 */
 
@@ -522,6 +526,7 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
+  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 0);
   while (1)
   {
   }
