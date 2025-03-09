@@ -29,17 +29,20 @@ void state_init()
 	static uint32_t lastBlinkTime = 0;
 	static uint8_t textVisible = 1;
 
+	//write first line of text
+	LCD_SetCursor(0, 2);
+	LCD_SendString("TEMP CONTROL");
+
+	LCD_SetCursor(1, 2);
+
+	//count time to change visibility of the second time
 	if (HAL_GetTick() - lastBlinkTime >= 1000)
 	{
 		lastBlinkTime = HAL_GetTick();
 		textVisible = !textVisible;
 	}
 
-	LCD_SetCursor(0, 2);
-	LCD_SendString("TEMP CONTROL");
-
-	LCD_SetCursor(1, 2);
-
+	//write second line of text
 	if (textVisible)
 	{
 		LCD_SendString("CLICK START");
@@ -49,9 +52,9 @@ void state_init()
 		LCD_SendString("           ");
 	}
 
+	//change state if action button is pressed
 	if (HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1)
 	{
 		change_state(STATE_REG_TYPE);
 	}
 }
-
