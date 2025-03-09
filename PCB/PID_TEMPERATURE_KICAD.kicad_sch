@@ -8635,7 +8635,7 @@
 		)
 		(uuid "487c616e-89c5-4159-811a-ce4714e86026")
 	)
-	(label "REG_MODE"
+	(label "STM_RUNNING"
 		(at 151.13 76.2 0)
 		(effects
 			(font
@@ -8665,7 +8665,7 @@
 		)
 		(uuid "5f0e560b-d7e3-4664-95e0-ed7c24feabcb")
 	)
-	(label "STM_RUNNING"
+	(label "REG_MODE"
 		(at 201.93 31.75 90)
 		(effects
 			(font
@@ -8795,7 +8795,7 @@
 		)
 		(uuid "899794ac-c9ec-4c0e-b462-3d22b1f59f75")
 	)
-	(label "STM_RUNNING"
+	(label "REG_MODE"
 		(at 151.13 66.04 0)
 		(effects
 			(font
@@ -9145,7 +9145,7 @@
 		)
 		(uuid "f125ce9d-8cd4-4778-8ede-cc4b865cfed1")
 	)
-	(label "REG_MODE"
+	(label "STM_RUNNING"
 		(at 173.99 31.75 90)
 		(effects
 			(font

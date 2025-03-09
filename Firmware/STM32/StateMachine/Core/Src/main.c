@@ -448,7 +448,7 @@ static void MX_GPIO_Init(void)
                           |FAN_CTRL_Pin|HEAT_CTRL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, BUZZER_CTRL_Pin|STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BUZZER_CTRL_Pin|REG_MODE_Pin|CONFIG_MODE_Pin|STM_RUNNING_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : ENC1_BTN_Pin ENC2_BTN_Pin */
   GPIO_InitStruct.Pin = ENC1_BTN_Pin|ENC2_BTN_Pin;
@@ -487,8 +487,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BUZZER_CTRL_Pin STM_RUNNING_Pin CONFIG_MODE_Pin REG_MODE_Pin */
-  GPIO_InitStruct.Pin = BUZZER_CTRL_Pin|STM_RUNNING_Pin|CONFIG_MODE_Pin|REG_MODE_Pin;
+  /*Configure GPIO pins : BUZZER_CTRL_Pin REG_MODE_Pin CONFIG_MODE_Pin STM_RUNNING_Pin */
+  GPIO_InitStruct.Pin = BUZZER_CTRL_Pin|REG_MODE_Pin|CONFIG_MODE_Pin|STM_RUNNING_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
