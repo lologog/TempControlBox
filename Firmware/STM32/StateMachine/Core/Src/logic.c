@@ -21,6 +21,7 @@ void state_machine_run(void)
 	{
 	case STATE_INIT: state_init(); break; //screen that waits for user first input (button click)
 	case STATE_REG_TYPE: state_reg_type(); break; //screen that show different algorithm types for regulation
+	case STATE_BANG_BANG_CONF: state_bang_bang_conf(); break; //set coniguration for the bang bang regulation - here temperature and offset
 	}
 }
 
@@ -102,4 +103,10 @@ void state_reg_type()
 		}
 		pressedKey = '\0';
 	}
+}
+
+void state_bang_bang_conf()
+{
+	LCD_SetCursor(0, 0);
+	LCD_SendString("DESIRED TEMP: ");
 }
