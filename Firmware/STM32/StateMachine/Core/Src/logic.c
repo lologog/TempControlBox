@@ -91,15 +91,13 @@ void state_reg_type()
 	}
 	else if (pressedKey != '\0') //wrong input from the user
 	{
-		LCD_Clear();
-
 		//show string WRONG NUMBER! for 2 seconds
+		LCD_Clear();
 		uint32_t show_time = 0;
 		showTime = HAL_GetTick();
 		while (HAL_GetTick() - showTime <= 2000)
 		{
-			pressedKey = '\0';
-			LCD_SetCursor(0, 0);
+			LCD_SetCursor(0, 1);
 			LCD_SendString("WRONG NUMBER!");
 		}
 		pressedKey = '\0';
