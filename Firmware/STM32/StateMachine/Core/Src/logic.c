@@ -63,6 +63,7 @@ void state_init()
 void state_reg_type()
 {
 	static char pressedKey = '\0';
+	static uint16_t showTime = 0;
 
 	HAL_GPIO_WritePin(CONFIG_MODE_GPIO_Port, CONFIG_MODE_Pin, 1);
 
@@ -88,8 +89,19 @@ void state_reg_type()
 		currentState = STATE_PID_CONF;
 		LCD_Clear();
 	}
-	else
+	else if (pressedKey != '\0') //wrong input from the user
 	{
+		LCD_Clear();
 
+		//show string WRONG NUMBER! for 2 seconds
+		uint32_t show_time = 0;
+		showTime = HAL_GetTick();
+		while (HAL_GetTick() - showTime <= 2000)
+		{
+			pressedKey = '\0';
+			LCD_SetCursor(0, 0);
+			LCD_SendString("WRONG NUMBER!");
+		}
+		pressedKey = '\0';
 	}
 }
