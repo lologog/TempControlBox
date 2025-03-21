@@ -24,7 +24,8 @@ void state_machine_run(void)
 	{
 	case STATE_INIT: state_init(); break; //screen that waits for user first input (button click)
 	case STATE_REG_TYPE: state_reg_type(); break; //screen that show different algorithm types for regulation
-	case STATE_BANG_BANG_TEMP_CONF: state_bang_bang_conf(); break; //set coniguration for the bang bang regulation - here temperature and offset
+	case STATE_BANG_BANG_TEMP_CONF: state_bang_bang_temp_conf(); break; //set coniguration for the bang bang regulation - here temperature and offset
+	case STATE_BANG_BANG_OFFSET_CONF: state_bang_bang_offset_conf(); break;
 	}
 }
 
@@ -109,7 +110,7 @@ void state_reg_type()
 	}
 }
 
-void state_bang_bang_conf()
+void state_bang_bang_temp_conf()
 {
 	static uint32_t enterTime = 0;
 	static bool delayStarted = false;
@@ -149,21 +150,9 @@ void state_bang_bang_conf()
 			//checking if there is still place in the table
             if (length < sizeof(writtenTemperature) - 1)
             {
-                //automatically insert a dot after the second digit
-                if (length == 2 && !dotInserted)
-                {
-                    writtenTemperature[length] = '.';
-                    writtenTemperature[length + 1] = '\0';
-                    dotInserted = true;
-                    length++;  //increase length since we added a character
-                }
 
-                //add the new digit if there's still space
-                if (length < sizeof(writtenTemperature) - 1)
-                {
-                    writtenTemperature[length] = currentKey;
-                    writtenTemperature[length + 1] = '\0';
-                }
+                writtenTemperature[length] = currentKey;
+                writtenTemperature[length + 1] = '\0';
             }
 		}
 	}
@@ -172,14 +161,21 @@ void state_bang_bang_conf()
 	LCD_SendString(writtenTemperature);
 
 	//accepting written temperature
-	if ((HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1) && (length == sizeof(writtenTemperature) - 1))
+	if ((HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1) && (length == sizeof(writtenTemperature) - 2))
 	{
 		finalTemperature = atof(writtenTemperature);
 		memset(writtenTemperature, 0, strlen(writtenTemperature)); //clear the table
 		delayStarted = false;
+		LCD_Clear();
 
 		currentState = STATE_BANG_BANG_OFFSET_CONF;
 	}
+}
+
+void state_bang_bang_offset_conf()
+{
+	LCD_SetCursor(0, 0);
+	LCD_SendString("CHOOSE OFFSET: ");
 }
 
 
