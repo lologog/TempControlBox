@@ -172,7 +172,7 @@ void state_bang_bang_conf()
 	LCD_SendString(writtenTemperature);
 
 	//accepting written temperature
-	if (HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1)
+	if ((HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1) && (length == sizeof(writtenTemperature) - 1))
 	{
 		finalTemperature = atof(writtenTemperature);
 		memset(writtenTemperature, 0, strlen(writtenTemperature)); //clear the table
