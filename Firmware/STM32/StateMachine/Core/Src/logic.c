@@ -116,6 +116,7 @@ void state_bang_bang_conf()
 	static bool keyReleased = true;
 	static uint8_t length = 0;
 	static char writtenTemperature[6] = {0};
+	static bool dotInserted = false;
 
 
 	LCD_SetCursor(0, 0);
@@ -146,11 +147,24 @@ void state_bang_bang_conf()
 
 			length = strlen(writtenTemperature);
 			//checking if there is still place in the table
-			if (length < sizeof(writtenTemperature) - 1)
-			{
-				writtenTemperature[length] = currentKey;
-				writtenTemperature[length + 1] = '\0';
-			}
+            if (length < sizeof(writtenTemperature) - 1)
+            {
+                //automatically insert a dot after the second digit
+                if (length == 2 && !dotInserted)
+                {
+                    writtenTemperature[length] = '.';
+                    writtenTemperature[length + 1] = '\0';
+                    dotInserted = true;
+                    length++;  //increase length since we added a character
+                }
+
+                //add the new digit if there's still space
+                if (length < sizeof(writtenTemperature) - 1)
+                {
+                    writtenTemperature[length] = currentKey;
+                    writtenTemperature[length + 1] = '\0';
+                }
+            }
 		}
 	}
 
