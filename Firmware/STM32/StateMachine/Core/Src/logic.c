@@ -101,6 +101,7 @@ void state_reg_type()
 			LCD_SetCursor(0, 1);
 			LCD_SendString("WRONG NUMBER!");
 		}
+		LCD_Clear();
 		pressedKey = '\0';
 	}
 }
