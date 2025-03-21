@@ -7,8 +7,11 @@
 
 #include "logic.h"
 #include "main.h"
+#include "stdbool.h"
 
 static SystemState currentState = STATE_INIT;
+
+static float finalTemperature = 0;
 
 void change_state(SystemState newState)
 {
@@ -21,7 +24,7 @@ void state_machine_run(void)
 	{
 	case STATE_INIT: state_init(); break; //screen that waits for user first input (button click)
 	case STATE_REG_TYPE: state_reg_type(); break; //screen that show different algorithm types for regulation
-	case STATE_BANG_BANG_CONF: state_bang_bang_conf(); break; //set coniguration for the bang bang regulation - here temperature and offset
+	case STATE_BANG_BANG_TEMP_CONF: state_bang_bang_conf(); break; //set coniguration for the bang bang regulation - here temperature and offset
 	}
 }
 
@@ -82,7 +85,7 @@ void state_reg_type()
 
 	if (pressedKey == '1')
 	{
-		currentState = STATE_BANG_BANG_CONF;
+		currentState = STATE_BANG_BANG_TEMP_CONF;
 		LCD_Clear();
 	}
 	else if (pressedKey == '2')
@@ -108,6 +111,66 @@ void state_reg_type()
 
 void state_bang_bang_conf()
 {
+	static uint32_t enterTime = 0;
+	static bool delayStarted = false;
+	static bool keyReleased = true;
+	static uint8_t length = 0;
+	static char writtenTemperature[6] = {0};
+
+
 	LCD_SetCursor(0, 0);
-	LCD_SendString("DESIRED TEMP: ");
+	LCD_SendString("CHOOSE TEMP: ");
+
+	//one time delay to not get the 1 from the previous state
+	if (!delayStarted)
+	{
+		enterTime = HAL_GetTick();
+		delayStarted = true;
+	}
+
+	if (HAL_GetTick() - enterTime >= 500)
+	{
+		//read the clicked number
+		char currentKey = Keyboard_readKey();
+
+		//checking if the key is released
+		if (currentKey == '\0')
+		{
+			keyReleased = true;
+		}
+
+		//if the key was pressed and released
+		if (currentKey != '\0' && keyReleased)
+		{
+			keyReleased = false;
+
+			length = strlen(writtenTemperature);
+			//checking if there is still place in the table
+			if (length < sizeof(writtenTemperature) - 1)
+			{
+				writtenTemperature[length] = currentKey;
+				writtenTemperature[length + 1] = '\0';
+			}
+		}
+	}
+
+	LCD_SetCursor(1, 0);
+	LCD_SendString(writtenTemperature);
+
+	//accepting written temperature
+	if (HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == 1)
+	{
+		finalTemperature = atof(writtenTemperature);
+		memset(writtenTemperature, 0, strlen(writtenTemperature)); //clear the table
+		delayStarted = false;
+
+		currentState = STATE_BANG_BANG_OFFSET_CONF;
+	}
 }
+
+
+
+
+
+
+
