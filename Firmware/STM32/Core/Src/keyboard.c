@@ -18,12 +18,27 @@ const char keyMap[4][3] = {
 // Function to read the pressed key
 char Keyboard_readKey(void)
 {
+    // Add a small delay to ensure stable readings
+    HAL_Delay(10);
+    
     for (int row = 0; row < 4; row++) {
-        // Set only one row to LOW, others to HIGH
-        HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, row == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
-        HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, row == 1 ? GPIO_PIN_RESET : GPIO_PIN_SET);
-        HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, row == 2 ? GPIO_PIN_RESET : GPIO_PIN_SET);
-        HAL_GPIO_WritePin(ROW4_GPIO_Port, ROW4_Pin, row == 3 ? GPIO_PIN_RESET : GPIO_PIN_SET);
+        // Set all rows to HIGH initially
+        HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(ROW4_GPIO_Port, ROW4_Pin, GPIO_PIN_SET);
+        
+        // Short delay for pins to stabilize
+        HAL_Delay(1);
+        
+        // Set only one row to LOW
+        if (row == 0) HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_RESET);
+        else if (row == 1) HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_RESET);
+        else if (row == 2) HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_RESET);
+        else if (row == 3) HAL_GPIO_WritePin(ROW4_GPIO_Port, ROW4_Pin, GPIO_PIN_RESET);
+        
+        // Short delay for pins to stabilize
+        HAL_Delay(1);
 
         // Check columns for the current row
         if (HAL_GPIO_ReadPin(COL1_GPIO_Port, COL1_Pin) == GPIO_PIN_RESET) return keyMap[row][0];

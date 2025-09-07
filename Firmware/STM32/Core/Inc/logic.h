@@ -11,6 +11,8 @@
 typedef enum {
 	STATE_INIT,
 	STATE_CONTROL_TYPE,
+	STATE_ON_OFF_TEMP_CONF,
+	STATE_PID_TEMP_CONF
 }SystemState;
 
 #endif /* INC_LOGIC_H_ */

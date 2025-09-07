@@ -124,7 +124,7 @@ int main(void)
   LCD_Init(&hi2c1);
 
   //turn on the LED that shows that STM is working
-  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, 1);
+  HAL_GPIO_WritePin(STM_RUNNING_GPIO_Port, STM_RUNNING_Pin, GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 
