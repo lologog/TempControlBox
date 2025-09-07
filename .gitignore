@@ -1,12 +1,19 @@
 #STM32
-Firmware/STM32/StateMachine/Debug/
-Firmware/STM32/StateMachine/Drivers/
-Firmware/STM32/.metadata/
-Firmware/STM32/StateMachine/.cproject
-Firmware/STM32/StateMachine/.mxproject
-Firmware/STM32/StateMachine/.project
-Firmware/stm32/StateMachine/.settings/
-Firmware/STM32/StateMachine/StateMachine Debug.launch
+*Debug*
+*.cproject
+*.project
+*.mxproject
+*.settings/
+*.vscode/
+*compile_commands.json
+*cmake_install.cmake
+*CMakeCache.txt
+*CMakePresets.json
+*build.ninja
+*cmake/
+*CmakeFiles/
+
+
 
 #PCB
 PCB/PID_TEMPERATURE_KICAD-backups
